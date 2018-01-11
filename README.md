@@ -1,0 +1,2 @@
+# rspmsg
+common response message
