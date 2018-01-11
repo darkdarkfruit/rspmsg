@@ -89,6 +89,15 @@
         * make_successful_message 
         * make_failed_message
 
+# FAQ
+* Why use "S" and "F" to represents "SUCCESSFUL" and "FAILED"? How about 1 or 0, or true or false.
+    
+    
+    1. "S" and "F" is clear and presentative.
+    2. 1 or 0? In many programing languages, 1 stands for true, 0 stands for false; while in linux return code, 
+       triditionally, 0 stands for successful-code, non-0(eg:1) stands for error-code.
+    3. true or false? In interactive envirenment, we might confuse boolean value: (true, false) with string value
+       ("true", "false"), and that will make us misarable in large project.
 
 #  Usage: (sample)
 
