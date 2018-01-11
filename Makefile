@@ -46,6 +46,6 @@ git_push_all:
 git_push_tags: git_push_all
 	git push --tags
 
-# github
-git push --all
-git push --tags
+github:
+	git push --all
+	git push --tags
