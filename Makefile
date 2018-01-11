@@ -12,6 +12,7 @@ test: ${files}
 
 # make a source distribution in dist/
 sdist: ${files}
+    rm dist/*
 	python setup.py sdist
 
 
