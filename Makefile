@@ -25,7 +25,7 @@ install : test
 
 
 # git push to github
-# do `git remote add origin https://github.com/darkdarkfruit/python-rspmsg.git` first
+# do `git remote add origin https://github.com/darkdarkfruit/rspmsg.git` first
 git_push_all:
 	git push --a
 

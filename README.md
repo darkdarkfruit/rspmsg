@@ -3,7 +3,7 @@
   A python rspmsg module with simplication and modification attached.
 
 
-#  Note:
+# Note:
   python version: >=3.6
 
   (For python2.7 version, use rspmsg_version < 0.9, eg: https://github.com/darkdarkfruit/rspmsg/releases/tag/v_0.7.1)
@@ -65,12 +65,12 @@
 
 
 
-#  Install:
-    * pip install python-rspmsg or (pip3 install python-rspmsg)
+# Install:
+    * pip install rspmsg or (pip3 install rspmsg)
     Or
     * download the tarbal, decompress it, then run "python setup.py install"
 
-#  Test:
+# Test:
       # ensure you have the pytest for python3
       > pip3 install pytest
       > whereis pytest
@@ -102,7 +102,7 @@
     
     In [2]: rspmsg.__version__
        ...: 
-    Out[2]: '0.9'
+    Out[2]: '0.1.0'
     
     In [3]: msg = rspmsg.make_successful_message(code=0, data={'payload' : 'yes'})
        ...: 
