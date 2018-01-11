@@ -5,7 +5,7 @@ default: test
 	echo ''
 
 
-test: ${files} 
+test: ${files}
 	echo ''
 	pytest rspmsg/
 
@@ -22,6 +22,17 @@ upload: sdist
 
 install : test
 	python setup.py install
+
+
+docs: ${files}
+	echo "Generating docs"
+	# do sphinx-quickstart first
+	# http://www.sphinx-doc.org/en/stable/tutorial.html
+	# http://www.sphinx-doc.org/en/stable/invocation.html#invocation-apidoc
+	rm docs/source/[^i]*.rst
+	sphinx-apidoc -o docs/source rspmsg
+	cd docs && make clean && make html
+
 
 
 # git push to github

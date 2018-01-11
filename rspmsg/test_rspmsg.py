@@ -23,8 +23,10 @@
 #
 
 '''
-rspmsg test
-==========
+=============
+ rspmsg test
+=============
+
 You should have pytest installed first.
 pip install -U pytest
 

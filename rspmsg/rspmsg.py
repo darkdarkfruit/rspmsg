@@ -21,19 +21,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 #
-
 '''
-
-# Rspmsg specification
-
-
-    ## Original rspmsg link:
-    [https://labs.omniti.com/labs/rspmsg](https://labs.omniti.com/labs/rspmsg)
-
-
-    ## What's modified:
-    ### Fields:
-
+=======
+rspmsg
+=======
+Rspmsg specification::
 
     |--------+--------+-----------+-----------+------------+-------------------------------------------------------|
     | Field  | type   | Required? | Optional? | value      | Meaning                                               |
@@ -51,7 +43,6 @@
 
 '''
 
-
 import json
 
 STATUS_SUCCESSFUL = 'S'
@@ -64,18 +55,19 @@ STATUSES = (STATUS_SUCCESSFUL, STATUS_FAILED)
 
 class Message(dict):
     """
-    (status is always in state: "S" or "F"(represents "Successful", "Failed"), no 3th state)
+    specification::
+        (status is always in state: "S" or "F"(represents "Successful", "Failed"), no 3th state)
 
-    |--------+--------+----------+----------+-------------------------------------------------------|
-    | Field  | type   | Required | Optional | Meaning                                               |
-    |--------+--------+----------+----------+-------------------------------------------------------|
-    | status | string | * (S/F)  |          | Is the response successful?                           |
-    | code   | any    |          | *        | CODE for application logic(Normally it is an integer) |
-    | data   | any    |          | *        | Data(payload) of the response                         |
-    | desc   | any    |          | *        | Description: normally it's a helping infomation       |
-    | meta   | any    |          | *        | eg: servers/ips chain in distributed env.             |
-    |        |        |          |          |                                                       |
-    |--------+--------+----------+----------+-------------------------------------------------------|
+        |--------+--------+----------+----------+-------------------------------------------------------|
+        | Field  | type   | Required | Optional | Meaning                                               |
+        |--------+--------+----------+----------+-------------------------------------------------------|
+        | status | string | * (S/F)  |          | Is the response successful?                           |
+        | code   | any    |          | *        | CODE for application logic(Normally it is an integer) |
+        | data   | any    |          | *        | Data(payload) of the response                         |
+        | desc   | any    |          | *        | Description: normally it's a helping infomation       |
+        | meta   | any    |          | *        | eg: servers/ips chain in distributed env.             |
+        |        |        |          |          |                                                       |
+        |--------+--------+----------+----------+-------------------------------------------------------|
 
 
     """
@@ -174,7 +166,7 @@ class Message(dict):
             return ''
 
     def as_dict(self, skip_none=False):
-        """ return  a normal dict """
+        """ return a normal dict """
         if skip_none:
             return {k: v for k, v in self.items() if v is not None}
         else:
@@ -224,14 +216,22 @@ class Message(dict):
         return cls.load_from_dict(d)
 
 
-class SuccessfulMessage(Message):
-    def __init__(self):
-        super(SuccessfulMessage, self).__init__(STATUS_SUCCESSFUL)
-
-
-class FailedMessage(Message):
-    def __init__(self):
-        super(FailedMessage, self).__init__(STATUS_FAILED)
+# -----------------------------------------------------------------------------
+# -------- *BEGIN* seems useless --------
+#
+# class SuccessfulMessage(Message):
+#     def __init__(self):
+#         super(SuccessfulMessage, self).__init__(STATUS_SUCCESSFUL)
+#
+#
+# class FailedMessage(Message):
+#     def __init__(self):
+#         super(FailedMessage, self).__init__(STATUS_FAILED)
+#
+#
+#
+# -------- * END * seems useless --------
+# -----------------------------------------------------------------------------
 
 
 def make_successful_message(code=None, data=None, desc=None, meta=None):
@@ -252,6 +252,7 @@ def make_failed_message(code=None, data=None, desc=None, meta=None):
     msg.desc = desc
     msg.meta = meta
     return msg
+
 
 s = make_successful_message
 f = make_failed_message
