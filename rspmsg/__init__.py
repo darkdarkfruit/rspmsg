@@ -1,15 +1,16 @@
-from .rspmsg import Message, make_successful_message, make_failed_message, SuccessfulMessage, FailedMessage
+from .rspmsg import Message, make_successful_message, make_failed_message, s, f
 
 __author__ = 'darkdarkfruit'
 
-VERSION = (0, 0, 1)
+VERSION_TUPLE = (0, 0, 1)
+VERSION_TUPLE_IN_STR = [str(i) for i in VERSION_TUPLE]
+
 
 
 def get_version():
-    version = '%s.%s' % (VERSION[0], VERSION[1])
-    if VERSION[2]:
-        version = '%s.%s' % (version, VERSION[2])
-    return version
-
+    return '.'.join(VERSION_TUPLE_IN_STR)
 
 __version__ = get_version()
+
+if __name__ == '__main__':
+    print(__version__)
