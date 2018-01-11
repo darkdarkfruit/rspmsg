@@ -81,6 +81,22 @@ class Message(dict):
     """
 
     def __init__(self, status):
+        """
+        (status is always in state: "S" or "F"(represents "Successful", "Failed"), no 3th state)
+
+        |--------+--------+----------+----------+-------------------------------------------------------|
+        | Field  | type   | Required | Optional | Meaning                                               |
+        |--------+--------+----------+----------+-------------------------------------------------------|
+        | status | string | * (S/F)  |          | Is the response successful?                           |
+        | code   | any    |          | *        | CODE for application logic(Normally it is an integer) |
+        | data   | any    |          | *        | Data(payload) of the response                         |
+        | desc   | any    |          | *        | Description: normally it's a helping infomation       |
+        | meta   | any    |          | *        | eg: servers/ips chain in distributed env.             |
+        |        |        |          |          |                                                       |
+        |--------+--------+----------+----------+-------------------------------------------------------|
+
+
+        """
         super(Message, self).__init__()
         self['status'] = status if status in STATUSES else STATUS_FAILED
         self['code'] = None
@@ -90,20 +106,10 @@ class Message(dict):
 
     @property
     def status(self):
-        """get status
-
-        Arguments:
-        - `self`:
-        """
         return self['status']
 
     @status.setter
     def status(self, status):
-        """get status
-
-        Arguments:
-        - `self`:
-        """
         if status not in STATUSES:
             print(f'Invalid status: {status}. Nothing changes. Valid status are: {STATUSES}')
             return
@@ -111,93 +117,54 @@ class Message(dict):
 
     @property
     def code(self):
-        """get code
-
-        Arguments:
-        - `self`:
-        """
         return self['code']
 
     @code.setter
     def code(self, code):
-        """ set code
-
-        Arguments:
-        - 'self':
-        - 'code' : set code
-        """
         self['code'] = code
 
     @property
     def data(self):
-        """get data
-
-        Arguments:
-        - `self`:
-        """
         return self['data']
 
     @data.setter
     def data(self, data):
-        """ set data
-
-        Arguments:
-        - 'self':
-        - 'data' : set data
-        """
         self['data'] = data
 
     @property
     def desc(self):
-        """get desc
-
-        Arguments:
-        - `self`:
-        """
         return self['desc']
 
     @desc.setter
     def desc(self, desc):
-        """ set desc
-
-        Arguments:
-        - 'self':
-        - 'desc' : set desc
-        """
         self['desc'] = desc
 
     @property
     def meta(self):
-        """get meta
-
-        Arguments:
-        - `self`:
-        """
         return self['meta']
 
     @meta.setter
     def meta(self, meta):
-        """ set meta
-
-        Arguments:
-        - 'self':
-        - 'meta' : set meta
-        """
         self['meta'] = meta
 
     def is_successful(self):
+        """ Is the message a successful message? (Normally used in client side) """
         return self.status == STATUS_SUCCESSFUL
 
     def is_failed(self):
+        """ Is the message a failed message? (Normally used in client side)"""
         return self.status == STATUS_FAILED
 
     def mark_successful(self):
+        """ Mark the message as a successful message """
         self.status = STATUS_SUCCESSFUL
 
     def mark_failed(self):
+        """ Mark the message as a failed message """
         self.status = STATUS_FAILED
 
     def status_in_full_string(self):
+        """ Return 'SUCCESSFUL' or 'FAILED' or ''(if invalid status) """
         if self.status == STATUS_SUCCESSFUL:
             return STATUS_SUCCESSFUL_FULL_STRING
         elif self.status == STATUS_FAILED:
@@ -207,12 +174,14 @@ class Message(dict):
             return ''
 
     def as_dict(self, skip_none=False):
+        """ return  a normal dict """
         if skip_none:
             return {k: v for k, v in self.items() if v is not None}
         else:
             return {k: v for k, v in self.items()}
 
     def dumps(self, skip_none=False):
+        """ Dumps to bytes using json.dumps """
         return json.dumps(self.as_dict(skip_none=skip_none))
 
     # def __getattr__(self, name):
@@ -226,6 +195,7 @@ class Message(dict):
 
     @classmethod
     def load_from_dict(cls, d) -> 'Message or None':
+        """ Try loading from a dict. Return Message if ok else None. """
         if 'status' not in d:
             msg = 'Could not found field:"status" in dict, returning None'
             print(msg)
@@ -242,7 +212,8 @@ class Message(dict):
         return msg
 
     @classmethod
-    def loads(cls, json_bytes):
+    def loads(cls, json_bytes) -> 'Message or None':
+        """ Try loading from json_bytes. Return Message if ok else None."""
         try:
             d = json.loads(json_bytes)
         except Exception as e:
@@ -264,6 +235,7 @@ class FailedMessage(Message):
 
 
 def make_successful_message(code=None, data=None, desc=None, meta=None):
+    """ make a SUCCESSFUL message """
     msg = Message(STATUS_SUCCESSFUL)
     msg.code = code
     msg.data = data
@@ -273,6 +245,7 @@ def make_successful_message(code=None, data=None, desc=None, meta=None):
 
 
 def make_failed_message(code=None, data=None, desc=None, meta=None):
+    """ make a FAILED message """
     msg = Message(STATUS_FAILED)
     msg.code = code
     msg.data = data

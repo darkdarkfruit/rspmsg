@@ -3,7 +3,7 @@
   A python rspmsg module with simplication and modification attached.
 
 
-#  Note:
+# Note:
   python version: >=3.6
 
   (For python2.7 version, use rspmsg_version < 0.9, eg: https://github.com/darkdarkfruit/rspmsg/releases/tag/v_0.7.1)
@@ -33,14 +33,44 @@
 
 * Field:status is always in state: "S" or "F"(represents "Successful", "Failed"), no 3th state.
 
+## Decide essage type responded in server side
+
+#### When do we set the message as successful or faild? It varies. Here are some suggestions.
+* If the server can reponse with correspondent resource right now, we should mark the message as a 'S' (SUCCESSFUL) message.
+* If the server can **NOT** response with correspondent resource right now, we should mark the message as a 'F' (FAILED) message while setting a meaningful code.
+    * eg1:
+    
+            rspmsg_successful = {
+                status : "S",
+                ...
+            }
+    
+    * eg2:
+
+            # If we want to return a response message to tell client that:
+            #   1. debug info: the message has flowed to nodes: ["192.168.1.6", "192.168.1.7"]
+            #   2. Please wait 5 seconds to retry.
+            # we might response a message like below:
+            rspmsg_failed = {
+                status : "F",
+                code : 100,
+                data : {
+                    seconds: 5
+                },
+                desc : "Server is busy, please wait 5 seconds to continue",
+                meta : {
+                    nodes: ["192.168.1.6", "192.168.1.7"]
+                }
+    
 
 
-#  Install:
-    * pip install python-rspmsg or (pip3 install python-rspmsg)
+
+# Install:
+    * pip install rspmsg or (pip3 install rspmsg)
     Or
     * download the tarbal, decompress it, then run "python setup.py install"
 
-#  Test:
+# Test:
       # ensure you have the pytest for python3
       > pip3 install pytest
       > whereis pytest
@@ -72,7 +102,7 @@
     
     In [2]: rspmsg.__version__
        ...: 
-    Out[2]: '0.9'
+    Out[2]: '0.1.0'
     
     In [3]: msg = rspmsg.make_successful_message(code=0, data={'payload' : 'yes'})
        ...: 
