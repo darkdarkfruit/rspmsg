@@ -1,3 +1,30 @@
+"""
+
+# Rspmsg specification
+
+
+    ## Original rspmsg link:
+    [https://labs.omniti.com/labs/rspmsg](https://labs.omniti.com/labs/rspmsg)
+
+
+    ## What's modified:
+    ### Fields:
+
+
+    |--------+--------+-----------+-----------+------------+-------------------------------------------------------|
+    | Field  | type   | Required? | Optional? | value      | Meaning                                               |
+    |--------+--------+-----------+-----------+------------+-------------------------------------------------------|
+    | status | string | *         |           | "S" or "F" | Is the response successful?                           |
+    | code   | any    |           | *         |            | CODE for application logic(Normally it is an integer) |
+    | data   | any    |           | *         |            | Data(payload) of the response                         |
+    | desc   | any    |           | *         |            | Description: normally it's a helping infomation       |
+    | meta   | any    |           | *         |            | Meta info. eg: servers/ips chain in distributed env.  |
+    |        |        |           |           |            |                                                       |
+    |--------+--------+-----------+-----------+------------+-------------------------------------------------------|
+
+* Field:status is always in state: "S" or "F"(represents "Successful", "Failed"), no 3th state.
+
+"""
 from .rspmsg import Message, make_successful_message, make_failed_message, s, f
 
 __author__ = 'darkdarkfruit'
@@ -6,9 +33,9 @@ VERSION_TUPLE = (0, 0, 1)
 VERSION_TUPLE_IN_STR = [str(i) for i in VERSION_TUPLE]
 
 
-
 def get_version():
     return '.'.join(VERSION_TUPLE_IN_STR)
+
 
 __version__ = get_version()
 

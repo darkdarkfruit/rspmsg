@@ -51,7 +51,6 @@
 
 '''
 
-
 import json
 
 STATUS_SUCCESSFUL = 'S'
@@ -174,7 +173,7 @@ class Message(dict):
             return ''
 
     def as_dict(self, skip_none=False):
-        """ return  a normal dict """
+        """ return a normal dict """
         if skip_none:
             return {k: v for k, v in self.items() if v is not None}
         else:
@@ -224,14 +223,22 @@ class Message(dict):
         return cls.load_from_dict(d)
 
 
-class SuccessfulMessage(Message):
-    def __init__(self):
-        super(SuccessfulMessage, self).__init__(STATUS_SUCCESSFUL)
-
-
-class FailedMessage(Message):
-    def __init__(self):
-        super(FailedMessage, self).__init__(STATUS_FAILED)
+# -----------------------------------------------------------------------------
+# -------- *BEGIN* seems useless --------
+#
+# class SuccessfulMessage(Message):
+#     def __init__(self):
+#         super(SuccessfulMessage, self).__init__(STATUS_SUCCESSFUL)
+#
+#
+# class FailedMessage(Message):
+#     def __init__(self):
+#         super(FailedMessage, self).__init__(STATUS_FAILED)
+#
+#
+#
+# -------- * END * seems useless --------
+# -----------------------------------------------------------------------------
 
 
 def make_successful_message(code=None, data=None, desc=None, meta=None):
@@ -252,6 +259,7 @@ def make_failed_message(code=None, data=None, desc=None, meta=None):
     msg.desc = desc
     msg.meta = meta
     return msg
+
 
 s = make_successful_message
 f = make_failed_message
