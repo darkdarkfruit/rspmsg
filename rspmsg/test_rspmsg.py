@@ -90,6 +90,14 @@ def test_rspmsg():
     assert msg.data == data
     assert msg.desc == desc
     assert msg.meta == meta
+
+    msg = loads(json.dumps(d))
+    assert not msg.is_failed()
+    assert msg.is_successful()
+    assert msg.code == code
+    assert msg.data == data
+    assert msg.desc == desc
+    assert msg.meta == meta
     d = msg.as_dict()
     for k, v in d.items():
         assert v == getattr(msg, k)

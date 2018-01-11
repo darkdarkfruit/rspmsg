@@ -102,7 +102,7 @@
     
     In [2]: rspmsg.__version__
        ...: 
-    Out[2]: '0.1.0'
+    Out[2]: '0.6.0'
     
     In [3]: msg = rspmsg.make_successful_message(code=0, data={'payload' : 'yes'})
        ...: 
@@ -163,4 +163,10 @@
     In [17]: msg_loaded.dumps(skip_none=True)
     Out[17]: '{"status": "S", "code": 0, "data": {"payload": "yes"}}'
     
-    In [18]: 
+    In [18]: rspmsg.loads(json.dumps({'status' : 'S', 'code' : 0, 'data' : {'payload' : 'yes'}}))
+    Out[18]: 
+    {'code': 0,
+     'data': {'payload': 'yes'},
+     'desc': None,
+     'meta': None,
+     'status': 'S'}

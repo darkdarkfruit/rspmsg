@@ -16,7 +16,7 @@ Rspmsg specification::
 * Field:status is always in state: "S" or "F"(represents "Successful", "Failed"), no 3th state.
 
 """
-from .rspmsg import Message, make_successful_message, make_failed_message, s, f
+from .rspmsg import Message, make_successful_message, make_failed_message, s, f, loads
 
 __author__ = 'darkdarkfruit'
 

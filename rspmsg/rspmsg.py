@@ -256,3 +256,5 @@ def make_failed_message(code=None, data=None, desc=None, meta=None):
 
 s = make_successful_message
 f = make_failed_message
+loads = Message.loads
+
