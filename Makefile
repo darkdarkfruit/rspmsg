@@ -12,7 +12,7 @@ test: ${files}
 
 # make a source distribution in dist/
 sdist: ${files}
-    rm dist/*
+	rm dist/*
 	python setup.py sdist
 
 
@@ -31,7 +31,7 @@ docs: ${files}
 	# http://www.sphinx-doc.org/en/stable/tutorial.html
 	# http://www.sphinx-doc.org/en/stable/invocation.html#invocation-apidoc
 	rm docs/source/[^i]*.rst
-	sphinx-apidoc -o docs/source rspmsg
+	sphinx-apidoc -f -o docs/source rspmsg
 	cd docs && make clean && make html
 
 
