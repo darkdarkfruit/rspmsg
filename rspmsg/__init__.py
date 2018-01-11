@@ -1,15 +1,6 @@
 """
 
-# Rspmsg specification
-
-
-    ## Original rspmsg link:
-    [https://labs.omniti.com/labs/rspmsg](https://labs.omniti.com/labs/rspmsg)
-
-
-    ## What's modified:
-    ### Fields:
-
+Rspmsg specification::
 
     |--------+--------+-----------+-----------+------------+-------------------------------------------------------|
     | Field  | type   | Required? | Optional? | value      | Meaning                                               |

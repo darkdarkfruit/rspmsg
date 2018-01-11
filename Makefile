@@ -29,9 +29,9 @@ docs: ${files}
 	# do sphinx-quickstart first
 	# http://www.sphinx-doc.org/en/stable/tutorial.html
 	# http://www.sphinx-doc.org/en/stable/invocation.html#invocation-apidoc
+	rm docs/source/[^i]*.rst
 	sphinx-apidoc -o docs/source rspmsg
-	cd docs/
-	make html
+	cd docs && make clean && make html
 
 
 

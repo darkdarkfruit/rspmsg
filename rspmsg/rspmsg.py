@@ -21,19 +21,11 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 # THE SOFTWARE.
 #
-
 '''
-
-# Rspmsg specification
-
-
-    ## Original rspmsg link:
-    [https://labs.omniti.com/labs/rspmsg](https://labs.omniti.com/labs/rspmsg)
-
-
-    ## What's modified:
-    ### Fields:
-
+=======
+rspmsg
+=======
+Rspmsg specification::
 
     |--------+--------+-----------+-----------+------------+-------------------------------------------------------|
     | Field  | type   | Required? | Optional? | value      | Meaning                                               |
@@ -63,18 +55,19 @@ STATUSES = (STATUS_SUCCESSFUL, STATUS_FAILED)
 
 class Message(dict):
     """
-    (status is always in state: "S" or "F"(represents "Successful", "Failed"), no 3th state)
+    specification::
+        (status is always in state: "S" or "F"(represents "Successful", "Failed"), no 3th state)
 
-    |--------+--------+----------+----------+-------------------------------------------------------|
-    | Field  | type   | Required | Optional | Meaning                                               |
-    |--------+--------+----------+----------+-------------------------------------------------------|
-    | status | string | * (S/F)  |          | Is the response successful?                           |
-    | code   | any    |          | *        | CODE for application logic(Normally it is an integer) |
-    | data   | any    |          | *        | Data(payload) of the response                         |
-    | desc   | any    |          | *        | Description: normally it's a helping infomation       |
-    | meta   | any    |          | *        | eg: servers/ips chain in distributed env.             |
-    |        |        |          |          |                                                       |
-    |--------+--------+----------+----------+-------------------------------------------------------|
+        |--------+--------+----------+----------+-------------------------------------------------------|
+        | Field  | type   | Required | Optional | Meaning                                               |
+        |--------+--------+----------+----------+-------------------------------------------------------|
+        | status | string | * (S/F)  |          | Is the response successful?                           |
+        | code   | any    |          | *        | CODE for application logic(Normally it is an integer) |
+        | data   | any    |          | *        | Data(payload) of the response                         |
+        | desc   | any    |          | *        | Description: normally it's a helping infomation       |
+        | meta   | any    |          | *        | eg: servers/ips chain in distributed env.             |
+        |        |        |          |          |                                                       |
+        |--------+--------+----------+----------+-------------------------------------------------------|
 
 
     """
