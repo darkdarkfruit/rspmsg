@@ -39,9 +39,13 @@ docs: ${files}
 # git push to github
 # do `git remote add origin https://github.com/darkdarkfruit/rspmsg.git` first
 git_push_all:
-	git push --a
+	git push --all
 
 
 # git push with tags
 git_push_tags: git_push_all
 	git push --tags
+
+# github
+git push --all
+git push --tags
