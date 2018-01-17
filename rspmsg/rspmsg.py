@@ -254,7 +254,11 @@ def make_failed_message(code=None, data=None, desc=None, meta=None):
     return msg
 
 
+def dumps(msg: Message, skip_none=False):
+    """ shortcut for msg.dumps """
+    return msg.dumps(skip_none=skip_none)
+
+
 s = make_successful_message
 f = make_failed_message
 loads = Message.loads
-

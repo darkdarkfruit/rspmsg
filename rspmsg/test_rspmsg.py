@@ -106,6 +106,12 @@ def test_rspmsg():
     msg2 = Message.loads(msg.dumps())
     assert sorted([k, v] for k, v in msg.items()) == sorted([k, v] for k, v in msg2.items())
 
+    msg2 = loads(dumps(msg))
+    assert sorted([k, v] for k, v in msg.items()) == sorted([k, v] for k, v in msg2.items())
+
+    msg2 = loads(dumps(msg, skip_none=True))
+    assert sorted([k, v] for k, v in msg.items()) == sorted([k, v] for k, v in msg2.items())
+
     msg2 = Message.loads(msg.dumps(skip_none=True))
     assert sorted([k, v] for k, v in msg.items()) == sorted([k, v] for k, v in msg2.items())
     assert 'code' in msg2
